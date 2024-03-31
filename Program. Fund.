@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import messagebox
 from enum import Enum
+
 class VisitorCategory(Enum):
     ADULT = "Adult"
     CHILD = "Child"
     STUDENT_TEACHER = "Student/Teacher"
     SENIOR = "Senior"
     GROUP = "Group"
+
 class VisitPlace:
     def __init__(self, location_name, description):
         self.location_name = location_name
@@ -14,3 +16,33 @@ class VisitPlace:
 
 class PermanentGallery(VisitPlace):
     pass
+
+class ExhibitionHall(VisitPlace):
+    def __init__(self, location_name, description, start_date, end_date):
+        super().__init__(location_name, description)
+        self.start_date = start_date
+        self.end_date = end_date
+        self.exhibitions = []
+
+class Exhibition:
+    def __init__(self, name):
+        self.name = name
+        self.artworks = []
+
+    def add_artwork(self, artwork):
+        self.artworks.append(artwork)
+
+class Artwork:
+    def __init__(self, title, artist, creation_date, historical_significance):
+        self.title = title
+        self.artist = artist
+        self.creation_date = creation_date
+        self.historical_significance = historical_significance
+
+class Visitor:
+    def __init__(self, name, age, national_id, category):
+        self.name = name
+        self.age = age
+        self.national_id = national_id
+        self.category = category
+        self.tickets = []
