@@ -7,3 +7,10 @@ class VisitorCategory(Enum):
     STUDENT_TEACHER = "Student/Teacher"
     SENIOR = "Senior"
     GROUP = "Group"
+class VisitPlace:
+    def __init__(self, location_name, description):
+        self.location_name = location_name
+        self.description = description
+
+class PermanentGallery(VisitPlace):
+    pass
