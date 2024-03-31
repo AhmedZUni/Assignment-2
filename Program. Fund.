@@ -96,3 +96,19 @@ class VisitorManagementGUI:
 
         self.submit_button = tk.Button(self.root, text="Submit", command=self.submit_visitor)
         self.submit_button.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
+
+    def submit_visitor(self):
+        name = self.name_entry.get()
+        age = int(self.age_entry.get())
+        national_id = self.id_entry.get()
+        category = VisitorCategory(self.category_var.get())
+        visitor = Visitor(name, age, national_id, category)
+        self.visitors.append(visitor)
+
+        if len(self.visitors) == 3:
+            self.display_visitor_receipts()
+
+    def display_visitor_receipts(self):
+        for visitor in self.visitors:
+            visitor.print_receipt()
+
