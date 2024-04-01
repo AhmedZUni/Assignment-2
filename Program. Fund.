@@ -141,3 +141,47 @@ class TicketingSystem:
 
         self.calculate_button = tk.Button(root, text="Calculate Ticket Price", command=self.calculate_price)
         self.calculate_button.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
+
+    def calculate_price(self):
+        try:
+            name = self.name_entry.get()
+            age = int(self.age_entry.get())
+            national_id = self.id_entry.get()
+            category = self.category_var.get()
+            ticket_price = 0
+
+            if category == "Adult":
+                if 18 <= age <= 60:
+                    ticket_price = 63
+                else:
+                    messagebox.showerror("Error", "Adult ticket is applicable for ages between 18 and 60.")
+                    return
+            elif category in ("Child", "Student/Teacher", "Senior"):
+                if age < 18 or age > 60:
+                    ticket_price = 0
+                else:
+                    messagebox.showerror("Error",
+                                         f"{category} ticket is not applicable for ages between 18 and 60.")
+                    return
+            elif category == "Group":
+                ticket_price = 63 * 0.5
+            elif category == "Special Event":
+                # Define individual ticket prices for special events here
+                # For example:
+                ticket_price = 100
+
+            if category != "Special Event":
+                ticket_price += ticket_price * 0.05  # Applying 5% VAT
+
+            total_price = ticket_price
+            messagebox.showinfo("Ticket Price",
+                                f"Name: {name}\nAge: {age}\nNational ID: {national_id}\nCategory: {category}\nTotal Price: {total_price:.2f} AED")
+
+        except ValueError:
+            messagebox.showerror("Error", "Please enter a valid age.")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    gui = VisitorManagementGUI(root)
+    app = TicketingSystem(root)
+    root.mainloop()
