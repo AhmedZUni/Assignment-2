@@ -112,3 +112,32 @@ class VisitorManagementGUI:
         for visitor in self.visitors:
             visitor.print_receipt()
 
+class TicketingSystem:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Ticketing System")
+
+        self.age_label = tk.Label(root, text="Enter Age:")
+        self.age_label.grid(row=0, column=0, padx=10, pady=10)
+        self.age_entry = tk.Entry(root)
+        self.age_entry.grid(row=0, column=1, padx=10, pady=10)
+
+        self.name_label = tk.Label(root, text="Enter Name:")
+        self.name_label.grid(row=1, column=0, padx=10, pady=10)
+        self.name_entry = tk.Entry(root)
+        self.name_entry.grid(row=1, column=1, padx=10, pady=10)
+
+        self.id_label = tk.Label(root, text="Enter National ID:")
+        self.id_label.grid(row=2, column=0, padx=10, pady=10)
+        self.id_entry = tk.Entry(root)
+        self.id_entry.grid(row=2, column=1, padx=10, pady=10)
+
+        self.category_label = tk.Label(root, text="Select Category:")
+        self.category_label.grid(row=3, column=0, padx=10, pady=10)
+        self.category_var = tk.StringVar(root)
+        self.category_var.set("Adult")
+        self.category_dropdown = tk.OptionMenu(root, self.category_var, "Adult", "Child", "Student/Teacher", "Senior", "Group", "Special Event")
+        self.category_dropdown.grid(row=3, column=1, padx=10, pady=10)
+
+        self.calculate_button = tk.Button(root, text="Calculate Ticket Price", command=self.calculate_price)
+        self.calculate_button.grid(row=4, column=0, columnspan=2, padx=10, pady=10)
